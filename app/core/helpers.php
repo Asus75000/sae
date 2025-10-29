@@ -112,3 +112,19 @@ function url($path = '') {
 function asset($path) {
     return SITE_URL . '/assets/' . ltrim($path, '/');
 }
+
+/**
+ * Vérifie si l'utilisateur est connecté
+ * @return bool
+ */
+function isLogged() {
+    return isset($_SESSION['user_id']);
+}
+
+/**
+ * Vérifie si l'utilisateur est admin
+ * @return bool
+ */
+function isAdmin() {
+    return isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
+}
