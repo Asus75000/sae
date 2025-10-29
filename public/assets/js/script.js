@@ -135,6 +135,48 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.alert').forEach(alert => alert.style.display = 'none');
     }, 5000);
 
+    // Navigation via data-navigate (pour les tabs et boutons)
+    document.querySelectorAll('[data-navigate]').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = this.getAttribute('data-navigate');
+        });
+    });
+
+    // Confirmation avant action (pour les suppressions)
+    document.querySelectorAll('[data-confirm]').forEach(element => {
+        element.addEventListener('click', function(e) {
+            const message = this.getAttribute('data-confirm');
+            if(!confirm(message)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    // Toggle pour afficher/masquer des éléments (pour l'édition inline)
+    document.querySelectorAll('[data-toggle-edit]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = 'edit-' + this.getAttribute('data-toggle-edit');
+            const target = document.getElementById(targetId);
+            if(target) {
+                if(target.hasAttribute('data-hidden')) {
+                    target.removeAttribute('data-hidden');
+                    target.style.display = 'block';
+                } else {
+                    target.setAttribute('data-hidden', '');
+                    target.style.display = 'none';
+                }
+            }
+        });
+    });
+
+    // Masquer les éléments avec data-hidden au chargement
+    document.querySelectorAll('[data-hidden]').forEach(element => {
+        element.style.display = 'none';
+    });
+
     // Validation email
     document.querySelectorAll('input[type="email"]').forEach(input => {
         input.addEventListener('blur', function() {
