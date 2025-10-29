@@ -11,10 +11,10 @@
         <div class="container">
             <a href="<?= url('/') ?>" class="logo">KASTA CROSSFIT</a>
             <div class="nav-links">
-                <?php if(isset($_SESSION['user_id'])): ?>
+                <?php if(isLogged()): ?>
                     <a href="<?= url('/evenements') ?>">Événements</a>
                     <a href="<?= url('/membre') ?>">Mon Espace</a>
-                    <?php if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <?php if(isAdmin()): ?>
                         <a href="<?= url('/admin') ?>">Administration</a>
                     <?php endif; ?>
                     <a href="<?= url('/logout') ?>">Déconnexion</a>

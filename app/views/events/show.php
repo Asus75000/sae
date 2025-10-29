@@ -36,7 +36,7 @@
             <p><strong>Date événement :</strong> <?= formatDateTime($event['date_event_asso']) ?></p>
         <?php endif; ?>
 
-        <?php if(isset($_SESSION['user_id']) && strtotime($event['date_cloture']) > time()): ?>
+        <?php if(isLogged() && strtotime($event['date_cloture']) > time()): ?>
             <a href="<?= url('/inscription?type=' . $type . '&id=' . $event[$type === 'sport' ? 'id_event_sport' : 'id_event_asso']) ?>" class="btn">S'inscrire</a>
         <?php endif; ?>
     </div>
